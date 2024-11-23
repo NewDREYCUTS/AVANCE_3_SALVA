@@ -1,0 +1,24 @@
+<!-- mensaje de éxito-->
+<div class="contenedor_alerta respuestaCorrecta" th:if="${mensajeOK != null}" >
+  <div class="alerta">
+    <div class="icon_alerta">
+      <i class="fas fa-check-circle text-2xl"></i>
+    </div>
+    <div>
+      <span th:text="${mensajeOK}"></span>
+    </div>
+  </div>
+  <div class="slider_alerta"></div>
+</div>
+<!-- mensaje de error-->
+<div class="contenedor_alerta respuestaIncorrecta" th:if="${mensajeError != null}" >
+  <div class="alerta">
+    <div class="icon_alerta">
+      <i class="fas fa-times-circle text-2xl"></i>
+    </div>
+    <div>
+      <span th:text="${mensajeError}"></span>
+    </div>
+  </div>
+  <div class="slider_alerta"></div>
+</div>

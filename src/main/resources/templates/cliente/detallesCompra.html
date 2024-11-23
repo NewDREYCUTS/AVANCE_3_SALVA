@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tunea tu Bajada</title>
+    <link rel="shortcut icon" href="/img/estadisticas/img-5.png" type="image/x-icon">
+    <link rel="stylesheet" href="../bootstrap/bootstrap-icons/bootstrap-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/page.css">
+</head>
+
+<body style="background-color: black; color: white;">
+<div th:replace="~{/fragmentos/cliente/header :: div}"></div>
+
+<div class="mx-36 mt-12 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 border-4 border-double border-red-600 p-4 rounded-lg shadow-md">
+    <h1 class="text-2xl mb-4 text-red-500">Detalles Compras Código:
+        <p th:text="'N°: ' + ${id_compra}"></p>
+    </h1>
+    <h2 class="text-white">Precio Final
+        <p class="font-bold text-green-400" th:text="'S/'  + ${precioFinalcompra}"></p>
+    </h2>
+
+    <div class="border border-double border-red-600 shadow-md p-8 flex justify-between bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg" th:each="miCompra : ${miCompra}">
+        <div class="w-48">
+            <img class="w-32 h-16 border border-red-600 shadow-md rounded-lg" th:src="${miCompra.img}" alt="">
+        </div>
+        <div class="flex justify-between w-full gap-4 text-center text-white">
+            <div class="p-2 w-1/5">
+                <div>
+                    <a class="block text-red-400">Id Producto:</a>
+                    <a th:text="${miCompra.id_producto}"></a>
+                </div>
+            </div>
+            <div class="p-2 w-2/5">
+                <a class="block text-red-400">Descripción:</a>
+                <a th:text="${miCompra.descripcion}" class="text-sm"></a>
+            </div>
+            <div class="p-2 w-1/5">
+                <a class="block text-red-400">Cantidad:</a>
+                <a th:text="'( ' + ${miCompra.cantidad_carrito} + ' )'" class="text-sm"></a>
+            </div>
+            <div class="p-2 w-1/5">
+                <a class="block text-red-400">Precio Producto:</a>
+                <a th:text="'S/ ' + ${miCompra.precio_carrito}" class="text-sm font-bold"></a>
+            </div>
+            <div class="p-2 w-1/5">
+                <a class="block text-red-400">Total:</a>
+                <a th:text="'S/ ' + ${miCompra.subtotal}" class="text-sm font-bold"></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:replace="~{/fragmentos/cliente/footer :: div}"></div>
+
+<div id="modal_barra_lateral" class="hidden fixed w-screen h-screen flex z-1 top-0" style="background-color: rgba(0, 0, 0, 0.75);">
+    <!-- Sidebar -->
+    <div class="w-80 h-full bg-gradient-to-b from-gray-800 to-gray-900 text-white p-4 border-4 border-double border-red-600 rounded">
+        <div class="flex justify-between">
+            <a href="/" class="flex gap-2">
+                <img class="w-12 border border-red-500 rounded-full" src="/img/estadisticas/img-5.png" alt="">
+                <span class="mb-auto mt-auto text-red-500">FameTech</span>
+            </a>
+            <a id="cerrar_ventana_modal" class="mb-auto mt-auto cursor-pointer text-red-500">X</a>
+        </div>
+
+        <div class="font-bold text-xl mt-8 text-gray-100">
+            <a href="/cliente/login" class="block mb-4 text-red-400" th:if="${session.IdUsuario == null}">Iniciar Sesión</a>
+            <a href="/cliente/registrar" class="block mb-4 text-red-400" th:if="${session.IdUsuario == null}">Registraar</a>
+            <a href="/" class="block mb-4 text-gray-200">Inicio</a>
+            <a href="/cliente/productos" class="block mb-4 text-gray-200">Productos</a>
+            <a href="/nosotros" class="block mb-4 text-gray-200">Nosotros</a>
+            <a href="/cliente/compras" class="block mb-4 text-gray-200" th:unless="${session.IdUsuario == null}">Mis Compras</a>
+        </div>
+    </div>
+</div>
+<script>
+    var buttom_barra_lateral = document.getElementById("buttom_barra_lateral");
+    var modal_barra_lateral = document.getElementById("modal_barra_lateral");
+    var cerrar_ventana_modal = document.getElementById("cerrar_ventana_modal");
+
+    buttom_barra_lateral.addEventListener('click', () => {
+        modal_barra_lateral.classList.remove('hidden');
+    });
+
+    cerrar_ventana_modal.addEventListener('click', () => {
+        modal_barra_lateral.classList.add('hidden');
+    });
+</script>
+</body>
+
+
+</html>

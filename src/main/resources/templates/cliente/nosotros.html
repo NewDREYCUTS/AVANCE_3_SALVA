@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store</title>
+    <link rel="shortcut icon" href="/img/logofoot.png" type="image/x-icon">
+    <link rel="stylesheet" href="../bootstrap/bootstrap-icons/bootstrap-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/Acerca_de.css">
+</head>
+
+<body class="bg-black text-white">
+    <div th:replace="~{/fragmentos/cliente/header :: div}"></div>
+    <!-- nosotros -->
+    <div class="relative">
+        <div>
+            <img src="img/nosotros/bg-2.jpg" alt="">
+        </div>
+    </div>
+    <br><br><br>
+    <!-- Shopping Cart -->
+    <div class="shopping-cart section">
+        <div class="w-full">
+            <div class="row">
+                <div class="col-12">
+
+                    <section class="gog-section">
+                        <h1>Seleccionando a mano lo mejor en juegos</h1>
+                        <p>Una selección de excelentes juegos sin DRM, desde éxitos modernos hasta clásicos de todos los tiempos, que realmente no debes perderte.</p>
+
+                        <div class="features">
+                            <div class="feature">
+                                <img src="img/logofoot.png" alt="Una selección curada de juegos" class="icon-a">
+                                <h2>Una selección curada de juegos</h2>
+                                <p>Desde títulos AAA excepcionales y juegos independientes únicos hasta lo mejor de los juegos clásicos. Todos los juegos están aquí porque los elegimos para ti.</p>
+                            </div>
+
+                            <div class="feature">
+                                <img src="img/logofoot.png" alt="Alimentando a tu coleccionista interior" class="icon-a">
+                                <h2>Alimentando a tu coleccionista interior</h2>
+                                <p>Ofrecer juegos con la mayor cantidad de elementos adicionales posible es el estilo de Game Store, incluso si eso significa explorar nuestros sótanos y títulos olvidados hace mucho tiempo.</p>
+                            </div>
+
+                            <div class="feature">
+                                <img src="img/logofoot.png" alt="Respetando a los creadores de juegos" class="icon-a">
+                                <h2>Respetando a los creadores de juegos</h2>
+                                <p>Cuando estás con nosotros, puedes estar seguro de que todos los juegos son legítimos y que tus compras apoyan a los propietarios y creadores legítimos.</p>
+                            </div>
+
+                            <div class="feature">
+                                <img src="img/logofoot.png" alt="Actualizando los clásicos para el presente" class="icon-a">
+                                <h2>Actualizando los clásicos para el presente</h2>
+                                <p>Incluso si el juego es más antiguo que tú, lo probamos exhaustivamente, corregimos todos los errores y aplicamos parches para que funcione perfectamente en tu PC de próxima generación y en los sistemas operativos modernos.</p>
+                            </div>
+
+                            <div class="feature">
+                                <img src="img/logofoot.png" alt="Cada juego merece brillar" class="icon-a">
+                                <h2>Cada juego merece brillar</h2>
+                                <p>Así como ponemos mucha atención en seleccionar grandes juegos, lo mismo ocurre en destacarlos en Game Store: tratamos cada lanzamiento como una celebración.</p>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--/ End Shopping Cart -->
+    <br>
+    <div th:replace="~{/fragmentos/cliente/footer :: div}"></div>
+
+    <div id="modal_barra_lateral" class="hidden fixed w-screen h-screen flex z-1 top-0  ">
+        <!-- Sidebar -->
+        <div class="w-80 h-full bg-white text-black p-4 border rounded">
+                <div class="flex justify-between">
+                    <a href="/" class="flex gap-2"><img class="w-12" src="/img/estadisticas/img-5.png" alt=""> <span class="mb-auto mt-auto">FameTech</span> </a>
+                    <a id="cerrar_ventana_modal" class="mb-auto mt-auto cursor pointer">X</a>                    
+                </div>
+
+                <div class="font-bold text-xl mt-8">
+                    <a href="/cliente/login" class="block mb-4" th:if="${session.IdUsuario == null}">iniciar sesion</a>
+                    <a href="/cliente/registrar" class="block mb-4" th:if="${session.IdUsuario == null}">registrar</a>
+                    <a href="/" class="block mb-4">inicio</a>
+                    <a href="/cliente/productos" class="block mb-4">productos</a>              
+                    <a href="/nosotros" class="block mb-4">nosotros</a>
+                    <a href="/cliente/compras" class="block mb-4" th:unless="${session.IdUsuario == null}">mis compras</a>
+                </div>
+        </div>       
+    </div>
+    <script>
+        var buttom_barra_lateral = document.getElementById("buttom_barra_lateral");
+        var modal_barra_lateral = document.getElementById("modal_barra_lateral");
+        var cerrar_ventana_modal = document.getElementById("cerrar_ventana_modal");
+
+        buttom_barra_lateral.addEventListener('click', () => {
+            modal_barra_lateral.classList.remove('hidden');
+        });
+
+        cerrar_ventana_modal.addEventListener('click', () => {
+            modal_barra_lateral.classList.add('hidden');
+        });
+    </script>
+</body>
+
+</html>

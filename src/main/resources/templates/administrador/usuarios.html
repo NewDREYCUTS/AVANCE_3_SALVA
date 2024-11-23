@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store || Usuarios</title>
+    <link rel="shortcut icon" href="/img/logofoot.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/page.css">
+</head>
+
+<body class="overflow-hidden">
+
+<div class="fixed  w-screen">
+    <!-- header -->
+    <div th:replace="~{/fragmentos/administrador/header :: div}"></div>
+
+    <!-- body -->
+    <div class="flex justify-between">
+        <div class="main_dashboard w-full h-screen mt-4 overflow-y-auto px-6 bg-black text-gray-200">
+            <div th:replace="~{/fragmentos/administrador/menu_lateral :: div}"></div>
+            <!-- Statistics cards -->
+            <div class="mt-4 flex flex-wrap gap-4 justify-center w-full">
+                <!-- Card: VideoJuegos -->
+                <div class="w-64 h-24 border-4 border-[rgb(255,0,0)] border-double rounded shadow-md bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900">
+                    <div class="flex justify-between w-full p-5">
+                        <div>
+                            <span class="block text-xl">Usuarios</span>
+                            <span class="text-sm" th:text="${cantUsuarios}"></span>
+                        </div>
+                        <div class="text-5xl">
+                            <img src="/img/estadisticas/icon_game_1.png" alt="" class="w-12 h-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-4 border-[rgb(255,0,0)] border-double rounded shadow-md bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900">
+                    <div class="flex justify-between w-ful p-5">
+                        <div>
+                            <span class="block text-xl">Administradores</span>
+                            <span class="text-sm" th:text="${cantUsuarios}"></span>
+                        </div>
+                        <div class="text-5xl">
+                            <img src="/img/estadisticas/icon_suspem_1.png" alt="" class="w-12 h-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-4 border-[rgb(255,0,0)] border-double rounded shadow-md bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900">
+                    <div class="flex justify-between w-ful p-5">
+                        <div>
+                            <span class="block text-xl">Compras</span>
+                            <span class="text-sm text-green-400">+ 30</span>
+                        </div>
+                        <div class="text-5xl">
+                            <img src="/img/estadisticas/icon_envio_1.png" alt="" class="w-12 h-12">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-4 border-[rgb(255,0,0)] border-double rounded shadow-md bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900">
+                    <div class="flex justify-between w-ful p-5">
+                        <div>
+                            <span class="block text-xl">Consumo</span>
+                            <span class="text-sm text-green-400 font-bold">+ S/ 6978.0</span>
+                        </div>
+                        <div class="text-5xl">
+                            <img src="/img/estadisticas/icon_coin_2.png" alt="" class="w-12 h-12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabla -->
+            <div class="w-full border border-red-500 p-6 shadow-inner rounded bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 overflow-y-auto mt-4">
+                <div class="flex justify-between flex-wrap mb-2">
+                    <a id="agregar" class="border rounded px-4 py-2 bg-red-500 text-white hover:bg-red-700 mb-2 shadow">
+                        <i class="bi fa fa-folder-plus"></i> <span>Agregar item</span>
+                    </a>
+                    <div class="bg-gray-700 rounded flex w-full max-w-md p-1 gap-2">
+                        <div class="flex w-full mt-auto mb-auto p-1 gap-2">
+                            <input
+                                    type="search"
+                                    class="w-full outline-none px-2 bg-gray-800 text-gray-200 text-sm placeholder-gray-500"
+                                    onkeyup="buscarTabla()"
+                                    id="searchInput"
+                                    placeholder="Buscar Producto..... ">
+                            <i class="fas fa-search text-2xl text-red-600"></i>
+                        </div>
+                    </a>
+                </div>
+                <table class="w-full border-collapse text-gray-300">
+                    <thead>
+                    <tr class="border-b-2 border-red-600 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-center font-bold">
+                        <td class="p-4">
+                            <div class="flex">
+                                <span>Codigo</span> <i class="bi bi-chevron-expand"></i>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex"><span>Nombre</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex"><span>Apellido</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex"><span>Correo</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex"><span>Telefono</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex"><span>Rol Usuario</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+                        <td class="p-4">
+                            <div class="flex"><span>Accion</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody th:each="listaUsuario : ${listaUsuario}">
+                    <tr class="border-b border-gray-500 text-sm hover:bg-gray-700">
+                        <td class="p-4" th:text="${listaUsuario.numero_documento}"></td>
+                        <td class="p-4" th:text="${listaUsuario.nombre}"></td>
+                        <td class="p-4" th:text="${listaUsuario.primer_apellido}"></td>
+                        <td class="p-4" th:text="${listaUsuario.correo}"></td>
+                        <td class="p-4" th:text="${listaUsuario.telefono}"></td>
+                        <td class="p-4" th:switch="${listaUsuario.id_rol}">
+                            <a th:case="1">CLIENTE</a>
+                            <a th:case="2">ADMINISTRADOR</a>
+                        </td>
+                        <td class="p-4">
+                            <a th:href="@{/administrador/editar/usuario/{id_usuario}(id_usuario=${listaUsuario.id_usuario})}"
+                               class="cursor-pointer rounded px-4 shadow-sm py-2 border bg-red-500 text-white hover:bg-red-700">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a th:href="@{/administrador/eliminar/usuario/{id_usuario}(id_usuario=${listaUsuario.id_usuario})}"
+                               class="cursor-pointer rounded px-4 shadow-sm py-2 border bg-red-700 text-white hover:bg-red-900">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="fixed w-screen h-screen bg-gray-600 bg-opacity-20 flex justify-center items-center  hidden" id="modal">
+    <div class="modal_add border bg-white shadow-sm rounded h-full " style="overflow-x: auto;">
+        <form action="/administrador/registrar/usuario" id="formulario" style="overflow-x: auto;"  method="post">
+            <h1 class="text-center text-3xl mt-4 mb-4">Agregar Usuario</h1>
+            <div class="flex gap-4 p-4 wrap" >
+                <div class="w-full">
+                    <label for="" class="block">id documento</label>
+                    <select name="id_documento" class="w-full outline-none border shadow-sm px-2 py-4 rounded" >
+                        <option th:each="TipoDocumento: ${TipoDocumento}" th:value="${TipoDocumento.id_documento}"  th:text="${TipoDocumento.nombre_documento}"></option>
+                    </select>
+                </div>
+                <div class="w-full">
+                    <label for="" class="block">Numero Documento</label>
+                    <input name="numero_documento" id="numero_documento" type="text"
+                           class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                    <!-- Mensaje de validación DNI -->
+                    <span id="dniValidationMessage"></span>
+                </div>
+            </div>
+
+            <div class="flex gap-4 p-4">
+                <div class="w-full">
+                    <label for="" class="block">Nombre</label>
+                    <input name="nombre" id="nombre" type="text"
+                           class="w-full outline-none border shadow-sm px-2 py-4 rounded" disabled>
+                           <span id="nombreValidationMessage" class="text-sm"></span>
+                </div>
+            </div>
+
+            <div class="flex gap-4 p-4 wrap">
+                <div class="w-full">
+                    <label for="" class="block">primer apellido</label>
+                    <input name="primer_apellido" id="primer_apellido" type="text"
+                           class="w-full outline-none border shadow-sm px-2 py-4 rounded" disabled>
+                    <span id="primerApellidoValidationMessage" class="text-sm"></span>
+                </div>
+                <div class="w-full">
+                    <label for="" class="block"> segundo apellido</label>
+                    <input name="segundo_apellido" id="segundo_apellido" type="text"
+                           class="w-full outline-none border shadow-sm px-2 py-4 rounded" disabled>
+                    <span id="segundoApellidoValidationMessage" class="text-sm"></span>
+                </div>
+            </div>
+            <div class="flex gap-4 p-4 wrap">
+                <div class="w-full">
+                    <label for="" class="block">telefono</label>
+                    <input name="telefono" id="telefono" type="text"
+                           class="w-full outline-none border shadow-sm px-2 py-4 rounded" disabled>
+                    <span id="telefonoValidationMessage" class="text-sm"></span>
+                </div>
+                <div class="w-full">
+                    <label for="" class="block">correo</label>
+                    <input name="correo" id="correo" type="text"
+                           class="w-full outline-none border shadow-sm px-2 py-4 rounded" disabled>
+                    <span id="correoValidationMessage" class="text-sm"></span>
+                </div>
+                <div class="w-full">
+                    <label for="" class="block">contrasena</label>
+                    <input name="contrasena" id="contrasena" type="text"
+                           class="w-full outline-none border shadow-sm px-2 py-4 rounded" disabled>
+                    <span id="contrasenaValidationMessage" class="text-sm"></span>
+                </div>
+            </div>
+            <div class="flex gap-4 p-4 wrap">
+                <div class="w-full">
+                    <label for="" class="block">Genero</label>
+                    <select name="id_genero" class="w-full outline-none border shadow-sm px-2 py-4 rounded" >
+                        <option th:each="genero: ${genero}" th:value="${genero.id_genero}"  th:text="${genero.nombre_genero}"></option>
+                    </select>
+                </div>
+                <div class="w-full">
+                    <label for="" class="block">Rol</label>
+                    <select name="id_rol" class="w-full outline-none border shadow-sm px-2 py-4 rounded" >
+                        <option th:each="RolUsuario: ${RolUsuario}" th:value="${RolUsuario.id_rol}"  th:text="${RolUsuario.nombre_rol}"></option>
+                    </select>
+                </div>
+                <div class="w-full">
+                    <label for="" class="block">estado </label>
+                    <select name="id_estado" class="w-full outline-none border shadow-sm px-2 py-4 rounded" >
+                        <option th:each="listaEstado: ${listaEstado}" th:value="${listaEstado.id_estado}"  th:text="${listaEstado.nombre_estado}"></option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="flex gap-4 p-4 justify-center">
+                <input type="submit" value="registrar"
+                       class="text-xl border rounded shadow-sm text-white bg-sky-700  px-4 py-2 cursor-pointer hover:bg-sky-800">
+                <a id="cerrar_modal"
+                   class="text-xl border rounded shadow-sm bg-white text-sky-700 border-sky-700  px-4 py-2 cursor-pointer">cerrar</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<script src="/js/main.js"></script>
+<script src="/js/modal.js"></script>
+</body>
+
+</html> 

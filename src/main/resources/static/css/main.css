@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+.border_color{
+    border-color: rgb(215, 215, 215);
+}
+.login-user{
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+@media(max-width: 520){
+    html{
+        min-width: 520px;
+    }
+}
+@media(max-width:500px){
+    .login-user{
+        width: 90%;
+    }
+
+}
+/* botones */
+.button-1{
+    background-color: #a81e21;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.button-1:hover{
+    background-color: #265B7A;
+    color: white;
+    text-decoration:none ;
+    box-shadow: 0px 0px 4px 0px black;
+    transition: 0.2s;
+}
+.button-2{
+    background-color: #24A636;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.button-2:hover{
+    background-color: #197024;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.button-3{
+    background-color: #F52C36;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.button-3:hover{
+    background-color: #A61E25;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.button-4{
+    background-color: #9F62D1;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.button-4:hover{
+    background-color: #784A9E;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-6{
+    background-color: #FF8B47;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.button-6:hover{
+    background-color: #B56233;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.button-7{
+    background-color: #57B0FF;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.button-7:hover{
+    background-color: #4892D4;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+
+
+/*AMPLIACION DE IMAGEN */
+
+.product-image {
+    transition: transform 0.3s ease;
+}
+.product-image:hover {
+    transform: scale(3);
+}

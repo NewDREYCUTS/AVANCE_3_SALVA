@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="shortcut icon" href="/img/estadisticas/img-5.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+
+</head>
+
+<body class="overflow-hidden" style="background-color: black; color: white">
+
+<div class="fixed  w-screen">
+    <!-- header -->
+    <div th:replace="~{/fragmentos/administrador/header :: div}"></div>
+
+    <!-- body -->
+    <div class="flex justify-between">
+        <!-- menu lateral -->
+        <div th:replace="~{/fragmentos/administrador/menu_lateral :: div}"></div>
+        <!-- body main -->
+        <div class="main_dashboard w-screen h-screen mt-4  overflow-y-auto ml-6 mr-6">
+            <div class="mt-4 cards_flex flex gap-4  justify-center w-full flex-wrap">
+                <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                    <div class="flex justify-between w-ful p-5">
+                        <div class="">
+                            <span class="block text-xl">Productos</span>
+                            <span class="text-sm" style="color: #f52a57;">10</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                    <div class="flex justify-between w-ful p-5">
+                        <div class="">
+                            <span class="block text-xl">Enviados</span>
+                            <span class="text-sm" style="color: #f52a57;">62</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                    <div class="flex justify-between w-ful p-5">
+                        <div class="">
+                            <span class="block text-xl">Suspendidos</span>
+                            <span class="text-sm" style="color: #f52a57;">2</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                    <div class="flex justify-between w-ful p-5">
+                        <div class="">
+                            <span class="block text-xl">Vendidos</span>
+                            <span class="text-sm" style="color: #f52a57;">120</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="w-full border border_color  p-6 shadow-inner rounded overflow-y-auto mt-4">
+                <form action="/administrador/guardar/usuario" method="post">
+                    <h1 style="font-size: 40px; color: #f52a57" class="text-center">Editar Usuario</h1>
+                    <div class="flex gap-4 p-4">
+                        <div class="w-full">
+                            <label for="" class="block">Codigo Usuario</label>
+                            <input name="id_usuario" style="color: #302e2f" type="text" th:value="${user.id_usuario}"
+                                   class="bg-gray-100 w-full outline-none border shadow-sm px-2 py-4 rounded" readonly>
+                        </div>
+                        <div class="w-full">
+                            <label for="" class="block">Id Documento</label>
+                            <select name="id_documento" style="color: #302e2f" id=""     th:field="${user.id_documento}"  class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                                <option th:value="1">DNI</option>
+                                <option th:value="2">PASAPORTE</option>
+                                <option th:value="3">OTRO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 p-4">
+                        <div class="w-full">
+                            <label for="" class="block">Numero Documento</label>
+                            <input style="color: #302e2f" name="numero_documento" type="text" th:value="${user.numero_documento}"
+                                   class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                        </div>
+                        <div class="w-full">
+                            <label for="" class="block">Nombre</label>
+                            <input style="color: #302e2f" name="nombre" type="text" th:value="${user.nombre}"
+                                   class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 p-4">
+                        <div class="w-full">
+                            <label for="" class="block">Primer Apellido</label>
+                            <input style="color: #302e2f" name="primer_apellido" type="text" th:value="${user.primer_apellido}"
+                                   class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                        </div>
+                        <div class="w-full">
+                            <label for="" class="block"> Segundo Apellido</label>
+                            <input style="color: #302e2f" name="segundo_apellido" type="text" th:value="${user.segundo_apellido}"
+                                   class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4">
+                        <div class="w-full">
+                            <label for="" class="block">telefono</label>
+                            <input style="color: #302e2f" name="telefono" type="text" th:value="${user.telefono}"
+                                   class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                        </div>
+                        <div class="w-full">
+                            <label for="" class="block">Correo</label>
+                            <input style="color: #302e2f" name="correo" type="text" th:value="${user.correo}"
+                                   class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                        </div>
+                        <div class="w-full">
+                            <label for="" class="block">Contrasena</label>
+                            <input style="color: #302e2f" name="contrasena" type="text" th:value="${user.contrasena}"
+                                   class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4">
+                        <div class="w-full">
+                            <label for="" class="block">Genero</label>
+                            <select style="color: #302e2f" name="id_genero" id=""     th:field="${user.id_genero}"  class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                                <option th:value="1">MASCULINO</option>
+                                <option th:value="2">FEMENINO</option>
+                                <option th:value="3">OTROS</option>
+                            </select>
+                        </div>
+                        <div class="w-full">
+                            <label for="" class="block">Rol</label>
+                            <select style="color: #302e2f" name="id_rol" id=""     th:field="${user.id_rol}"  class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                                <option th:value="1">CLIENTE</option>
+                                <option th:value="2">ADMINISTRADOR</option>
+                                <option th:value="3">MODERADOR</option>
+                            </select>
+                        </div>
+                        <div class="w-full">
+                            <label for="" class="block">Estado </label>
+                            <select style="color: #302e2f" name="id_estado" id=""     th:field="${user.id_estado}"  class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                                <option th:value="1">ACTIVO</option>
+                                <option th:value="2">DESACTIVO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 justify-center">
+                        <input type="submit" value="Guardar"
+                               class="text-xl border shadow-sm text-white px-9 py-2 cursor-pointer" style="background-color: #f52a57">
+                        <a href="/administrador/usuarios"
+                           class="text-xl border shadow-sm bg-white text-sky-700   px-9 py-2 cursor-pointer" style="border-color: #f52a57; color: #f52a57">Regresar</a>
+                    </div>
+                </form>
+            </div>
+
+            <br> <br> <br> <br> <br>
+        </div>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

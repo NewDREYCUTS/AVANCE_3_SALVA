@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME STORE</title>
+    <link rel="shortcut icon" href="/img/estadisticas/img-5.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/page.css">
+    <!--    <link rel="stylesheet" href="/bootstrap/bootstrap-icons/bootstrap-icons.css">-->
+</head>
+<body>
+<div th:replace="~{/fragmentos/cliente/header :: div}"></div>
+<div class=" mt-8">
+    <div th:replace="~{/fragmentos/validaciones/mensajesValidacion :: div}"></div>
+
+    <form  action="/cliente/update/datos" id="formulario" class="border border-gray-300 rounded-lg p-6 shadow-md bg-white max-w-md mx-auto " method="post">
+        <h1 class="flex justify-center mt-2">Actualizar Datos</h1>
+        <div class="flex gap-4 p-4 justify-center">
+            <div class="w-96">
+                <label for="" class="block">Codigo</label>
+                <input name="id_usuario" type="text" th:value="${usuario.id_usuario}"
+                       class="bg-gray-100 w-full outline-none border shadow-sm px-2 py-4 rounded" readonly>
+            </div>
+            <div class="w-96">
+                <label for="" class="block">Tipo Documento</label>
+                <select name="id_documento" id="id_documento" class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                    <option value="1">DNI</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex gap-4 p-4 justify-center">
+            <div class="w-96">
+                <label for="numero_documento" class="block">N° Documento</label>
+                <input name="numero_documento" id="numero_documento" class="w-full outline-none border shadow-sm px-2 py-4 rounded" th:value="${usuario.numero_documento}">
+                <!-- Validation Message for Numero Documento -->
+                <span id="dniValidationMessage" class="text-sm"></span>
+            </div>
+            <div class="w-96">
+                <label for="nombre" class="block">Nombres</label>
+                <input name="nombre" id="nombre" class="w-full outline-none border shadow-sm px-2 py-4 rounded" th:value="${usuario.nombre}">
+                <span id="nombreValidationMessage" class="text-sm"></span>
+            </div>
+        </div>
+
+        <div class="flex gap-4 p-4 justify-center">
+            <div class="w-96">
+                <label for="primer_apellido" class="block">Apellido Materno</label>
+                <input name="primer_apellido" id="primer_apellido" class="w-full outline-none border shadow-sm px-2 py-4 rounded" th:value="${usuario.primer_apellido}">
+                <span id="primerApellidoValidationMessage" class="text-sm"></span>
+            </div>
+            <div class="w-96">
+                <label for="segundo_apellido" class="block">Apellido Paterno</label>
+                <input name="segundo_apellido" id="segundo_apellido" class="w-full outline-none border shadow-sm px-2 py-4 rounded" th:value="${usuario.segundo_apellido}">
+                <span id="segundoApellidoValidationMessage" class="text-sm"></span>
+            </div>
+        </div>
+
+        <div class="flex gap-4 p-4 justify-center">
+            <div class="w-96">
+                <label for="telefono" class="block">Telefono</label>
+                <input name="telefono" id="telefono" class="w-full outline-none border shadow-sm px-2 py-4 rounded" th:value="${usuario.telefono}">
+                <span id="telefonoValidationMessage" class="text-sm"></span>
+            </div>
+            <div class="w-96">
+                <label for="correo" class="block">Correo</label>
+                <input name="correo" id="correo" class="w-full outline-none border shadow-sm px-2 py-4 rounded" th:value="${usuario.correo}">
+                <span id="correoValidationMessage" class="text-sm"></span>
+            </div>
+        </div>
+
+        <div class="flex gap-4 p-4 justify-center">
+            <div class="w-96">
+                <label for="contrasena" class="block">Contraseña</label>
+                <input name="contrasena" id="contrasena" class="w-full outline-none border shadow-sm px-2 py-4 rounded" th:value="${usuario.contrasena}">
+                <span id="contrasenaValidationMessage" class="text-sm"></span>
+            </div>
+            <div class="w-96">
+                <label for="genero" class="block">Genero</label>
+                <select name="id_genero" id="genero" class="w-full outline-none border shadow-sm px-2 py-4 rounded">
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex justify-center mb-8 mt-4">
+            <input type="submit" class="border rounded text-white border-red-700 shadow-sm bg-red-700 px-4 py-2 cursor-pointer" value="Actualizar Datos">
+        </div>
+    </form>
+    <br>
+</div>
+</body>
+
+<script src="/js/validation.js"></script>
+</html>

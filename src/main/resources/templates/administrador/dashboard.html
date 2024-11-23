@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vista</title>
+    <link rel="shortcut icon" href="/img/estadisticas/img-5.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/alerta.css">
+    <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="overflow-hidden" style="background-color: black; color: white">
+
+
+<div class="fixed  w-screen">
+    <!-- header -->
+    <div th:replace="~{/fragmentos/administrador/header :: div}"></div>
+    <div class="contenedor_alerta respuestaCorrecta" id="contenedor_alerta" th:if="${mensajeOK != null}">
+        <div class="alerta" id="alerta">
+            <div class="icon_alerta">
+
+                <i class="bi bi-check2"></i>
+            </div>
+            <div>
+                <span th:text="${mensajeOK}"></span>
+            </div>
+        </div>
+        <div class="slider_alerta"></div>
+    </div>
+    <script>
+        // Function to close the error alert after 3 seconds
+        setTimeout(function () {
+            cerrarErrorAlert();
+        }, 10000);
+        // Function to close the error alert
+        function cerrarErrorAlert() {
+            var errorAlerts = document.querySelectorAll('.alerta');
+            for (let error of errorAlerts) {
+                if (error) {
+                    error.style.display = 'none';
+                }
+            }
+        }
+    </script>
+    <!-- body -->
+    <div class="flex justify-between">
+
+
+
+        <!-- menu lateral -->
+        <div th:replace="~{/fragmentos/administrador/menu_lateral :: div}"></div>
+        <!-- body main -->
+        <div class="main_dashboard w-screen h-screen mt-4  overflow-y-auto ml-6 mr-6">
+
+            <div class="mt-4 cards_flex flex gap-4 justify-center w-full flex-wrap">
+                <div class="w-64 h-24 border-sm rounded ">
+                    <div class="flex justify-between w-full p-5">
+                        <div class="">
+                            <span class="block text-lg">Ventas</span>
+                            <span style="color: #f52a57" class="text-sm" th:text="${cantCompra}"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-sm rounded ">
+                    <div class="flex justify-between w-full p-5">
+                        <div class="">
+                            <span class="block text-lg">Devoluciones</span>
+                            <span class="text-sm" style="color: #f52a57">0</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-64 h-24 border-sm rounded">
+                    <div class="flex justify-between w-full p-5">
+                        <div class="">
+                            <span class="block text-lg">Ingresos</span>
+                            <span class="text-sm flex text-green-800 font-bold" style="color: #f52a57">S/.  <p th:text=" ${cantidad}"> </p></span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex  gap-8 mx-8">
+                <div class=" justify-center gap-8 flex flex-wrap">
+
+                </div>
+            </div>
+
+
+            <div class="w-full border border_color  p-6 shadow-inner rounded overflow-y-auto mt-4">
+                <h1 class="text-3xl" style="color: #f52a57">Ultimas Ventas</h1>
+                <table class="w-full border-collapse ">
+                    <thead class="bg-gray-700 text-gray-300">
+                    <tr class="border-b-2 border_color text-center font-bold">
+                        <td class="p-4  ">
+                            <div class="flex ">
+                                <span>codigo</span> <i class="bi bi-chevron-expand"></i>
+                            </div>
+                        </td>
+                        <td class="p-4 ">
+                            <div class="flex"><span>Fecha compra</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+                        <td class="p-4 ">
+                            <div class="flex"><span>Datos Usuario</span> <i class="bi bi-chevron-expand"></i>
+                            </div>
+                        </td>
+                        <td class="p-4 ">
+                            <div class="flex">
+                                <span>Ubicacion</span> <i class="bi bi-chevron-expand"></i>
+                            </div>
+                        </td>
+                        <td class="p-4 ">
+                            <div class="flex"><span>Total Consumo</span> <i class="bi bi-chevron-expand"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody th:each="listaCompras : ${listacompra}" class="bg-gray-600 divide-y divide-gray-600">
+
+
+                    <tr class="border-b border_color  text-sm">
+                        <td class="p-4" th:text="${listaCompras.id_compra}"></td>
+                        <td class="p-4" th:text="${listaCompras.fecha_venta}"></td>
+                        <td class="p-4" th:text="${listaCompras.id_usuario}"></td>
+                        <td class="p-4" th:text="${listaCompras.direccion_entrega}"></td>
+                        <td class="p-4 text-green-900 font-bold" > <i class="bi bi-plus-lg"></i> <span th:text="${listaCompras.total}"></span>  <i class="bi bi-arrow-up"></i></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <br> <br> <br> <br> <br>
+        </div>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="path/to/chartjs/dist/chart.umd.js"></script>
+</body>
+
+</html>

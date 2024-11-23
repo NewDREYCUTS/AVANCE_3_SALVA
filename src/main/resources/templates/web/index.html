@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store</title>
+    <link rel="shortcut icon" href="/img/logofoot.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/alerta.css">
+    <link rel="stylesheet" href="/css/page.css">
+</head>
+<div th:replace="~{/fragmentos/cliente/header :: div}"></div>
+<div class="relative bg-cover bg-center h-96" style="background-image: url('/img/products/banner_gamer.jpeg');">
+    <div class="absolute inset-0 bg-black opacity-20"></div>
+    <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center text-white">
+            <h1 class="text-6xl font-bold mt-4 mb-4">¡Bienvenido al mundo de los videojuegos!</h1>
+            <p class="text-lg mt-5 mb-5">"Tu juego, tus reglas"</p>
+            <a href="/cliente/productos" class="mb-5 mt-5 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-700 transition duration-300">¡Comenzar!</a>
+            <h1 style="color: #ff0000" class="text-3xl text-700 font-bold mt-5 mb-3">"Dale tu propio toque, sin límites"</h1>
+            <p style="color: #ff0000" class="text-3xl text-700 mt-4 mb-4">"El poder está en tus manos"</p>
+        </div>
+    </div>
+</div>
+<body class="bg-black text-white">
+<div th:replace="~{/fragmentos/validaciones/mensajesValidacion :: div}"></div>
+
+<div>
+    aca van nuestras ofertas
+</div>
+
+
+
+
+<div th:replace="~{/fragmentos/cliente/footer :: div}"></div>
+
+<div id="modal_barra_lateral" class="hidden lg:hidden fixed w-screen h-screen flex z-10 top-0">
+    <!-- Modal -->
+    <div class="w-80 h-screen bg-white text-black p-4 border rounded">
+        <div class="flex justify-between">
+            <a href="/" class="flex gap-2">
+                <img class="w-12" src="/img/estadisticas/img-5.png" alt="">
+                <span class="mb-auto mt-auto">Tunea tu Bajada</span>
+            </a>
+            <a id="cerrar_ventana_modal" class="mb-auto mt-auto cursor-pointer">X</a>
+        </div>
+
+        <div class="font-bold text-xl mt-8">
+            <a href="/cliente/login" class="block mb-4" th:if="${session.IdUsuario == null}">Iniciar sesión</a>
+            <a href="/cliente/registrar" class="block mb-4" th:if="${session.IdUsuario == null}">Registrar</a>
+            <a href="/" class="block mb-4">Inicio</a>
+            <a href="/cliente/productos" class="block mb-4">Productos</a>
+            <a href="/nosotros" class="block mb-4">Nosotros</a>
+            <a href="/cliente/compras" class="block mb-4" th:unless="${session.IdUsuario == null}">Mis compras</a>
+        </div>
+    </div>
+</div>
+
+<script src="/js/validation.js"></script>
+</body>
+
+</html>

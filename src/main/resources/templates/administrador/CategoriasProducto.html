@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store - Producto</title>
+    <link rel="shortcut icon" href="/img/logofoot.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/page.css">
+    <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body class="overflow-hidden" style="background-color: black; color: white">
+
+<div class="fixed  w-screen">
+    <!-- header -->
+    <div th:replace="~{/fragmentos/administrador/header :: div}"></div>
+
+    <!-- body -->
+    <div class="flex justify-between">
+        <!-- menu laterala -->
+
+        <!-- body main -->
+        <div class="main_dashboard w-screen h-screen mt-4  overflow-y-auto ml-6 mr-6">
+            <div th:replace="~{/fragmentos/administrador/menu_lateral :: div}"></div>
+            <div class="w-full border border_color  p-6 shadow-inner rounded overflow-y-auto mt-4">
+                <div class="flex justify-between flex-wrap mb-2 ">
+                    <div class="flex gap-4">
+                        <a href="#" class="mb-auto mt-auto">
+                            <form action="/administrador/agregar/categoria" method="post" class="flex">
+                                <input type="text" class="border px-4 py-2 " name="categoria">
+                                <input type="submit" style="background-color: #f52a57" value="Agregar Categoria"
+                                       class="border shadow-sm bg-sky-700 px-4 py-2 text-white" >
+                            </form>
+                        </a>
+                    </div>
+
+                    <a class="w-250 rounded mb-3" >
+                        <div class="flex w-full mt-auto mb-auto p-1 gap-0"  >
+                            <input type="search" class="h-8 w-full outline-none px-9 text-gray-950 text-sm placeholder-white" style="color:white; background-color: #f52a57"
+                                   onkeyup="buscarTabla()" id="searchInput"  placeholder="Buscar... ">
+                            <i class="fas text-2xl text-white"></i>
+                        </div>
+                    </a>
+                </div>
+                <table class="w-full border-collapse divide-gray-900" id="miTabla">
+                    <thead class="bg-gray-700 text-gray-300">
+                    <tr class="bg-gray-800 text-sm divide-gray-700 border-b-2 border_color text-center font-bold">
+                        <td class="p-4  ">
+                            <div class="flex ">
+                                <span>CODIGO</span> <i class="bi bi-chevron-expand"></i>
+                            </div>
+                        </td>
+                        <td class="p-4 ">
+                            <div class="flex"><span>NOMBRE</span> <i class="bi bi-chevron-expand"></i></div>
+                        </td>
+
+                        <td class="p-4 ">
+                            <div class="flex"><span>ELIMINAR</span> <i class="bi bi-chevron-expand"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody th:each="cat : ${categoria}" class="bg-gray-800 divide-y divide-gray-700">
+                    <tr class="border-b border_color  text-sm">
+                        <td class="p-4" th:text="${cat.id_categoria}">
+                        </td>
+                        <td class="p-4" th:text="${cat.nombre_categoria}">
+                        </td>
+                        <td>
+                            <a th:href="@{/administrador/eliminar/categoria/producto/{id_categoria}(id_categoria=${cat.id_categoria})}"
+                               class=" cursor-pointer rounded  px-4 shadow-sm py-2 border text-white hover:bg-red-900" style="background-color: #f52a57"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <br> <br> <br> <br> <br>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="/js/modal.js"></script>
+</body>
+
+</html>

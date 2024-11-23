@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <link rel="stylesheet" href="../css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME STORE</title>
+    <link rel="shortcut icon" href="/img/estadisticas/logofoot.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/alerta.css">
+</head>
+
+<body class="bg-black">
+<div class="min-h-screen flex justify-center items-center">
+    <div th:replace="~{/fragmentos/validaciones/mensajesValidacion :: div}"></div>
+
+    <form action="/autenticacion/login" method="POST" class="bg-gray-800 w-96 border rounded-lg shadow-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+            <a href="/" class="text-sm text-gray-400 hover:text-gray-200"><i class="fas fa-arrow-left mr-2"></i> Regresar</a>
+        </div>
+        <h1 class="text-3xl" style="color: #f52a57; text-align: center; font-weight: bold; margin-bottom: 1rem;">Inicia Sesión</h1>
+        <div>
+            <label for="numero_documento" class="block text-sm font-medium text-gray-300">Número de documento</label>
+            <input type="text" id="numero_documento" name="numero_documento" class="mt-1 px-4 py-2 border rounded-md w-full text-sm text-gray-900 focus:outline-none focus:ring focus:ring-[#f52a57]" placeholder="Ingrese su número" required>
+        </div>
+        <div class="mt-4">
+            <label for="contrasena" class="block text-sm font-medium text-gray-300">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" class="mt-1 px-4 py-2 border rounded-md w-full text-sm text-gray-900 focus:outline-none focus:ring focus:ring-[#f52a57]" placeholder="Contraseña" required>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+            <div>
+                <a href="#" class="text-sm text-blue-400 hover:underline">¿Olvidaste tu contraseña?</a>
+            </div>
+        </div>
+        <div class="mt-6 flex justify-center gap-4">
+            <input type="submit" class="border rounded bg-rose-700 text-sm font-bold text-white px-4 py-2 cursor-pointer hover:bg-rose-800 transition duration-200" value="Iniciar Sesión">
+            <a href="/cliente/registrar" class="border rounded bg-rose-700 text-sm font-bold text-white px-4 py-2 cursor-pointer hover:bg-rose-800 transition duration-200">Registrarse</a>
+        </div>
+    </form>
+</div>
+<script src="/js/validation.js"></script>
+</body>
+
+</html>

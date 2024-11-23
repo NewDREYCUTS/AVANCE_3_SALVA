@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store</title>
+    <link rel="shortcut icon" href="/img/logofoot.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/page.css">
+    <link rel="stylesheet" href="/css/alerta.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-icons/bootstrap-icons.css">
+</head>
+<body style="background-image: url('/img/bag/faq-bg.png');">
+    <div th:replace="~{/fragmentos/cliente/header :: div}"></div>
+        <br>
+        <!-- CATEGORIAS -->
+        <h1 class="flex justify-center text-3xl font-bold mb-3">PREVISUALIZACION</h1>
+        <form id="burgerForm" class="flex justify-center" ><br>
+            <label for="ingredients" class="px-4 py-2 mt-6 font-bold">JUEGOS SELECCIONADOS:</label>
+            <input type="text" id="ingredients" name="ingredients" class="w-7/12 border outline-none px-1 py-2 rounded focus:ring-2 focus:ring-inset focus:ring-red-600 mt-6 gap-2" readonly>
+            <button type="submit" class="px-4 py-2 bg-red-700  text-white rounded-md mt-6 gap-2">GENERAR IMAGEN</button>
+            <button onclick="location.href='/cliente/mostrar/compra'" class="px-4 py-2 bg-gray-900 text-white rounded-md mt-6 gap-2">VOLVER</button><br><br><br>
+        </form>
+        
+        <div class="flex justify-center" id="burgerPreview">
+            <img id="burgerImage" src="" alt="">
+        </div>
+       
+        <script>
+            window.onload = function() {
+                var sharedText = localStorage.getItem('sharedText');
+                if (sharedText) {
+                    document.getElementById('ingredients').value = sharedText;
+                }
+            }
+        </script>
+        
+        <script>
+            function addIngredient(ingredient) {
+                const ingredientsInput = document.getElementById('ingredients');
+                const currentIngredients = ingredientsInput.value ? ingredientsInput.value.split(',') : [];
+                if (!currentIngredients.includes(ingredient)) {
+                    currentIngredients.push(ingredient);
+                }
+                ingredientsInput.value = currentIngredients.join(',');
+            }
+        
+            document.getElementById('burgerForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const ingredients = document.getElementById('ingredients').value.split(',');
+        
+                fetch('/api/burger/preview', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ ingredients })
+                })
+                .then(response => response.text())
+                .then(imageUrl => {
+                    document.getElementById('burgerImage').src = imageUrl;
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        </script>
+
+        
+        <div th:replace="~{/fragmentos/cliente/footer :: div}"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+        <script src="/js/page.js"></script>
+            
+    <div id="modal_barra_lateral" class="hidden fixed w-screen h-screen flex z-1 top-0  ">
+        <!-- Sidebar -->
+        <div class="w-80 h-full bg-white text-black p-4 border rounded">
+                <div class="flex justify-between">
+                    <a href="/" class="flex gap-2"><img class="w-12" src="/img/logofoot.png" alt=""> <span class="mb-auto mt-auto">Game Store</span> </a>
+                    <a id="cerrar_ventana_modal" class="mb-auto mt-auto cursor pointer">X</a>
+                </div>
+
+                <div class="font-bold text-xl mt-8">
+                    <a href="/cliente/login" class="block mb-4" th:if="${session.IdUsuario == null}">iniciar sesion</a>
+                    <a href="/cliente/registrar" class="block mb-4" th:if="${session.IdUsuario == null}">registrar</a>
+                    <a href="/" class="block mb-4">inicio</a>
+                    <a href="/cliente/productos" class="block mb-4">productos</a>              
+                    <a href="/nosotros" class="block mb-4">nosotros</a>
+                    <a href="/cliente/compras" class="block mb-4" th:unless="${session.IdUsuario == null}">mis compras</a>
+                </div>
+        </div>       
+    </div>
+    <script>
+        var buttom_barra_lateral = document.getElementById("buttom_barra_lateral");
+        var modal_barra_lateral = document.getElementById("modal_barra_lateral");
+        var cerrar_ventana_modal = document.getElementById("cerrar_ventana_modal");
+
+        buttom_barra_lateral.addEventListener('click', () => {
+            modal_barra_lateral.classList.remove('hidden');
+        });
+
+        cerrar_ventana_modal.addEventListener('click', () => {
+            modal_barra_lateral.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

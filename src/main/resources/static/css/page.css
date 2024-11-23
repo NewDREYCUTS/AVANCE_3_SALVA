@@ -1,0 +1,40 @@
+.icon-bar{
+    display: none;
+}
+.AbrirMenuLateral {
+    animation: abrirAnimacion .8s forwards;
+  }
+  
+  @keyframes abrirAnimacion {
+    to {
+        width: 256px;
+    }
+  
+    from {
+        width: 0;
+    }
+  }
+  .modal_add{
+    width: 600px;
+  }
+  
+@media(max-width:750px){
+    .icon-bar{
+        display: flex;
+    }
+    .menu_page a{
+        display: none;
+    }
+    .modal_add{
+        width: 90%;
+    }
+    .wrap{
+        flex-wrap: wrap;
+    }
+}
+@media(max-width:500px){
+    body{
+        min-width: 500px;
+    }
+}
+

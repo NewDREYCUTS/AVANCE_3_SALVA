@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tunea tu Bajada</title>
+    <link rel="shortcut icon" href="/img/estadisticas/img-5.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/alerta.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body style="background-image: url('/img/bag/faq-bg.png');">
+<div class="min-h-screen flex justify-center items-center">
+
+    <div th:replace="~{/fragmentos/validaciones/mensajesValidacion :: div}"></div>
+
+    <form action="/administrador/registrar/user" method="POST" id="formulario" class="border bg-white shadow-sm w-96 px-4 py-6">
+        <a href="/" class="flex justify-end items-center">
+            <i class="fas fa-arrow-left mr-2"></i> Regresar
+        </a>
+        <h1 class="text-center text-2xl mb-2">Registrate Ahora</h1>
+
+        <div class="flex text-sm flex-wrap justify-between gap-4">
+            <div class="w-full outline-none">
+                <label for="" class="block">Tipo Documento</label>
+                <select name="id_documento" id="" class="border w-full px-1 py-2 rounded">
+                    <option value="1">DNI</option>
+                    <option value="2">PASAPORTE</option>
+                </select>
+            </div>
+
+            <div class="w-full">
+                <label for="" class="block">Numero Documento</label>
+                <input type="text" name="numero_documento" id="numero_documento" class="w-full border outline-none px-1 py-2 rounded">
+                <!-- Mensaje de validación DNI -->
+                <span id="dniValidationMessage"></span>
+            </div>
+        </div>
+
+        <div lass="flex text-sm justify-between gap-4">
+            <div class="w-full outline-none">
+                <label for="">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="w-full border outline-none px-1 py-2 rounded" disabled>
+                <span id="nombreValidationMessage" class="text-sm"></span>
+            </div>
+            <div class="w-full outline-none">
+                <label for="">Primer Apellido</label>
+                <input type="text" id="primer_apellido" name="primer_apellido" class="w-full border outline-none px-1 py-2 rounded" disabled>
+                <span id="primerApellidoValidationMessage" class="text-sm"></span>
+            </div>
+            <div class="w-full outline-none">
+                <label for="">Segundo Apellido</label>
+                <input type="text" id="segundo_apellido" name="segundo_apellido" class="w-full border outline-none px-1 py-2 rounded" disabled>
+                <span id="segundoApellidoValidationMessage" class="text-sm"></span>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label for="">Telefono</label>
+                <input type="text" id="telefono" name="telefono" class="w-full border outline-none px-1 py-2 rounded" disabled>
+                <span id="telefonoValidationMessage" class="text-sm"></span>
+            </div>
+            <div>
+                <label for="">Correo</label>
+                <input type="text" id="correo" name="correo" class="w-full border outline-none px-1 py-2 rounded" disabled>
+                <span id="correoValidationMessage" class="text-sm"></span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="">Contraseña</label>
+                <input type="text" id="contrasena" name="contrasena" class="w-full border outline-none px-1 py-2 rounded" disabled>
+                <span id="contrasenaValidationMessage" class="text-sm"></span>
+            </div>
+            <div>
+                <label for="">Genero</label>
+                <select name="id_genero" id="genero" class="w-full border outline-none px-1 py-2 rounded" disabled>
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                </select>
+            </div>
+            <div class="flex justify-center gap-4 mt-4">
+                <input type="submit" style="cursor: pointer" class="cursor-pointer border rounded bg-orange-600 text-white px-4 py-2" id="submit" value="Registrar" >
+                <a href="/cliente/login" class="border rounded bg-orange-600 text-white px-4 py-2.5">Iniciar sesión</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="/js/validation.js"></script>
+</body>
+
+

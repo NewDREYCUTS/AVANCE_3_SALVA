@@ -1,0 +1,24 @@
+<div
+        class="border-[3px] border-double border-red-500 shadow-[0_0px_10px_2px_rgba(255,0,0,0.6)] flex justify-between bg-black pt-3.5 pb-3.5 pl-8 pr-8">
+    <div class="flex gap-3">
+        <div class="mt-auto mb-auto cursor-pointer">
+            <a id="button_modal" class="text-2xl text-white"><i class="bi bi-justify"></i></a>
+        </div>
+        <div class="mt-auto mb-auto flex gap-2">
+            <img src="/img/logofoot.png" alt="" class="w-8 h-8 mt-auto mb-auto">
+            <a href="#" class="text-2xl text-white font-bold">GameStore</a>
+        </div>
+    </div>
+    <div class="flex gap-5 mt-auto mb-auto">
+        <div class="mt-auto mb-auto menu_top_option">
+            <ul class="flex gap-5">
+                <li><a href="#" class="text-white text-xl"><i class="bi bi-bell"></i></a></li>
+                <li><a href="#" class="text-white text-xl"><i class="bi bi-chat-square"></i></a></li>
+            </ul>
+        </div>
+        <div class="nombre_usuario mt-auto mb-auto">
+            <a href="#" class="bg-red-500 text-white px-4 py-2 border border-red-600 rounded shadow hover:shadow-sm"
+               th:text="${session.NombreUsuario}"></a>
+        </div>
+    </div>
+</div>

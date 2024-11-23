@@ -1,0 +1,47 @@
+<div class="header bg-black border-[3px] border-double border-red-500 shadow-[0_0px_10px_2px_rgba(255,0,0,0.6)]">
+    <div class="w-full flex justify-between px-4 py-4">
+        <!-- Logo y título -->
+        <div class="text-lg flex items-center">
+            <a href="/" class="flex gap-2 items-center">
+                <img class="w-12" src="/img/estadisticas/img-5.png" alt="">
+                <span class="text-white font-bold text-2xl">GameStore</span>
+            </a>
+        </div>
+
+        <!-- Menú de navegación -->
+        <div class="flex gap-4 items-center">
+            <!-- Menú de páginas -->
+            <div class="menu_page flex gap-6 text-sm items-center">
+                <a href="/" class="text-white hover:text-red-400 transition duration-300">Inicio</a>
+                <a href="/cliente/productos" class="text-white hover:text-red-400 transition duration-300">Productos</a>
+                <a href="/nosotros" class="text-white hover:text-red-400 transition duration-300">Sobre Nosotros</a>
+                <a href="/cliente/compras" th:unless="${session.IdUsuario == null}" class="text-white hover:text-red-400 transition duration-300">Mis Compras</a>
+            </div>
+
+            <!-- Opciones de sesión si el usuario no está logueado -->
+            <div class="usuario_sesion flex gap-4 items-center" th:if="${session.IdUsuario == null}">
+                <a href="/cliente/login" class="hidden lg:block bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Iniciar sesión</a>
+                <a href="/cliente/registrar" class="hidden lg:block bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Regístrate</a>
+            </div>
+
+            <!-- Nombre de usuario si está logueado -->
+            <div class="usuario_sesion flex gap-2 items-center" th:unless="${session.IdUsuario == null}">
+                <span class="text-sm font-bold bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300" th:text="${session.NombreUsuario}"></span>
+            </div>
+
+            <!-- Botón de logout -->
+            <div class="flex items-center" th:unless="${session.IdUsuario == null}">
+                <a href="/autenticacion/logout" class="text-3xl text-red-500 font-bold hover:text-red-700 transition duration-300">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+
+            <!-- Icono de menú lateral -->
+            <div class="flex items-center">
+                <a id="buttom_barra_lateral" class="lg:hidden text-2xl border border-red-500 rounded shadow-sm px-2 text-white hover:bg-red-500 transition duration-300">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

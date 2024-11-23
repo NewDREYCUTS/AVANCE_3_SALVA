@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store</title>
+    <link rel="shortcut icon" href="/img/logofoot.png" type="image/x-icon">
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color: black;">
+
+<!-- Header -->
+<div th:replace="~{/fragmentos/cliente/header :: div}"></div>
+
+<br><br><br><br>
+
+<!-- Main Content Section SECATE JACK -->
+<div class="mt-auto mb-auto ml-12">
+    <!-- Action Buttons -->
+    <a id="btn_registrar_Reclamo" class="border rounded shadow-sm px-2 py-4 text-white bg-red-600 hover:bg-red-800 cursor-pointer">Ingresar nuevo reclamo</a>
+    <a id="btn_saldo" class="border shadow-sm rounded bg-red-600 text-white px-2 py-4 cursor-pointer hover:bg-red-800">
+        <i class="fa fa-credit-card"></i> Recargar saldo <i class="fa fa-dollar-sign"></i>
+    </a>
+
+    <!-- Modal for Registering Balance -->
+    <div id="registrar_saldo" class="hidden fixed inset-0 flex items-center justify-center" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="w-96 border border-red-500 shadow-lg bg-gradient-to-b from-gray-800 to-gray-900 rounded">
+            <form action="/cliente/recargar/saldo" method="POST" class="p-4 text-white">
+                <h1 class="text-xl font-bold mb-4">Registrar Saldo</h1>
+                <a id="btn_close_saldo" class="flex justify-end font-bold cursor-pointer text-red-500">X</a>
+                <div class="mb-4">
+                    <label for="motivo" class="block">Ingrese la Cantidad a recargar: <strong>S/ .</strong></label>
+                    <input type="text" id="motivo" name="saldo_usuario" class="w-full border border-gray-600 py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-red-500">
+                </div>
+                <div>
+                    <input type="submit" value="Registrar" class="border shadow-sm bg-red-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-red-800">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Button to Update Data -->
+    <a href="/cliente/actualizar/datos" class="border shadow-sm rounded bg-red-600 text-white px-2 py-4 cursor-pointer hover:bg-red-800">
+        Actualizar Datos
+        <svg class="h-5 w-5 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4l5 5-9 9H6v-5l9-9z"></path>
+        </svg>
+    </a>
+</div>
+
+<!-- Modal for Registering Complaint -->
+<div id="reclamo_modal" class="hidden fixed inset-0 flex items-center justify-center" style="background-color: rgba(0, 0, 0, 0.8);">
+    <div class="w-96 border border-red-500 shadow-lg bg-gradient-to-b from-gray-800 to-gray-900 rounded">
+        <form action="" class="p-4 text-white">
+            <h1 class="text-xl font-bold mb-4">Registrar Reclamo</h1>
+            <a id="btn_close_registrar" class="flex justify-end font-bold cursor-pointer text-red-500">X</a>
+            <div class="mb-4">
+                <label for="motivo" class="block">Motivo</label>
+                <input type="text" id="motivo" class="w-full border border-gray-600 py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-red-500">
+            </div>
+            <div class="mb-4">
+                <label for="descripcion" class="block">Descripcion</label>
+                <textarea id="descripcion" class="w-full h-48 border border-gray-600 py-2 px-4 bg-gray-800 text-white focus:outline-none focus:ring-red-500"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Registrar" class="border shadow-sm bg-red-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-red-800">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Purchase History Section -->
+<div class="overflow-x-auto mx-12 p-4 border border-red-500 rounded shadow-lg bg-black mt-8">
+    <h1 class="flex justify-center text-3xl font-semibold text-red-500">HISTORIAL DE COMPRAS</h1>
+
+    <!-- Search and Balance Display -->
+    <div class="flex justify-between mb-4 text-white">
+        <div class="flex gap-4">
+            <div class="mt-auto mb-auto">
+                <label for="buscarProducto" class="block text-gray-300 font-semibold mb-2">Buscar Boleta</label>
+                <input type="text" onkeyup="buscarTabla()" id="searchInput" placeholder="Ingrese su ID de compra" class="px-2 py-1 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-red-500 focus:border-red-500">
+            </div>
+        </div>
+        <div class="mt-auto mb-auto">
+            <span class="flex text-lg gap-4">Saldo: <p th:text="'S/  ' + ${session.mySaldo}" class="font-bold text-green-400"></p></span>
+        </div>
+    </div>
+
+    <!-- Purchase Table -->
+    <table class="table-auto min-w-full divide-y divide-gray-700 text-white" id="miTabla">
+        <thead class="bg-gray-700 text-gray-300">
+        <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Id compra</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Id usuario</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Subtotal</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">IGV</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Total</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Fecha Compra</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Dirección Entrega</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Estado</th>
+            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Acción</th>
+        </tr>
+        </thead>
+        <tbody class="bg-gray-800 divide-y divide-gray-700 text-sm">
+        <tr th:each="misCompras : ${session.misCompras}">
+            <td class="px-6 py-4 whitespace-nowrap" th:text="${misCompras.id_compra}"></td>
+            <td class="px-6 py-4 whitespace-nowrap" th:text="${misCompras.id_usuario}"></td>
+            <td class="px-6 py-4 whitespace-nowrap font-bold text-green-400" th:text="'S/ ' +${misCompras.subtotal}"></td>
+            <td class="px-6 py-4 whitespace-nowrap font-bold text-green-400" th:text="'S/ ' +${misCompras.igv}"></td>
+            <td class="px-6 py-4 whitespace-nowrap font-bold text-green-400" th:text="'S/ ' +${misCompras.total}"></td>
+            <td class="px-6 py-4 whitespace-nowrap" th:text="${misCompras.fecha_venta}"></td>
+            <td class="px-6 py-4 whitespace-nowrap" th:text="${misCompras.direccion_entrega}"></td>
+            <td class="px-6 py-4 whitespace-nowrap" th:switch="${misCompras.id_estado}">
+                <p th:case="1" class="font-bold text-green-400 text-2xl"><i class="fa fa-check-circle"></i></p>
+                <p th:case="2"><i class="fa fa-times-circle text-red-400 text-2xl"></i></p>
+            </td>
+            <td>
+                <a class="cursor-pointer text-sm bg-red-600 hover:bg-red-800 px-2 py-1 text-white border rounded" th:href="@{/cliente/detalle/compra/{id_compra}(id_compra=${misCompras.id_compra})}">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a class="cursor-pointer text-sm bg-red-600 hover:bg-red-800 px-2 py-1 text-white border rounded" th:href="@{/cliente/detalle/compra/{id_compra}/pdf(id_compra=${misCompras.id_compra})}">
+                    <i class="fa fa-file-pdf"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Footer -->
+<div th:replace="~{/fragmentos/cliente/footer :: div}"></div>
+
+<!-- Sidebar Modal -->
+<div id="modal_barra_lateral" class="hidden fixed w-screen h-screen flex z-1 top-0">
+    <div class="w-80 h-full bg-white text-black p-4 border rounded">
+        <div class="flex justify-between">
+            <a href="/" class="flex gap-2"><img class="w-12" src="/img/estadisticas/img-5.png" alt=""> <span class="mb-auto mt-auto">FameTech</span></a>
+            <a id="cerrar_ventana_modal" class="mb-auto mt-auto cursor-pointer">X</a>
+        </div>
+        <div class="font-bold text-xl mt-8">
+            <a href="/cliente/login" class="block mb-4" th:if="${session.IdUsuario == null}">Iniciar sesión</a>
+            <a href="/cliente/registrar" class="block mb-4" th:if="${session.IdUsuario == null}">Registrarse</a>
+            <a href="/" class="block mb-4">Inicio</a>
+            <a href="/cliente/productos" class="block mb-4">Productos</a>
+            <a href="/nosotros" class="block mb-4">Nosotros</a>
+            <a href="/cliente/compras" class="block mb-4" th:unless="${session.IdUsuario == null}">Mis compras</a>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="/static/js/validation.js"></script>
+<script src="/js/modal.js"></script>
+
+<script>
+    // Handling modal visibility for Reclamo and Saldo
+    var reclamo_modal = document.getElementById("reclamo_modal");
+    var btn_close_registrar = document.getElementById("btn_close_registrar");
+    var btn_registrar_Reclamo = document.getElementById("btn_registrar_Reclamo");
+    btn_registrar_Reclamo.addEventListener('click', () => { reclamo_modal.classList.remove('hidden') });
+    btn_close_registrar.addEventListener('click', () => { reclamo_modal.classList.add('hidden') });
+
+    var registrar_saldo = document.getElementById("registrar_saldo");
+    var btn_close_saldo = document.getElementById("btn_close_saldo");
+    var btn_saldo = document.getElementById("btn_saldo");
+    btn_saldo.addEventListener('click', () => { registrar_saldo.classList.remove('hidden') });
+    btn_close_saldo.addEventListener('click', () => { registrar_saldo.classList.add('hidden') });
+</script>
+
+</body>
+
+</html>

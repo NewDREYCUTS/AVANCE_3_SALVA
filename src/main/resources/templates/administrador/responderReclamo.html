@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador || Productos</title>
+    <link rel="shortcut icon" href="/img/estadisticas/img-5.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body class="overflow-hidden">
+
+    <div class="fixed  w-screen">
+        <!-- header -->
+        <div th:replace="~{/fragmentos/administrador/header :: div}"></div>
+
+        <!-- body -->
+        <div class="flex justify-between">
+            <!-- menu lateral -->
+            <div th:replace="~{/fragmentos/administrador/menu_lateral :: div}"></div>
+            <!-- body main -->
+            <div class="main_dashboard w-screen h-screen mt-4  overflow-y-auto ml-6 mr-6">
+                <div class="mt-4 cards_flex flex gap-4  justify-center w-full flex-wrap">
+                    <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                        <div class="flex justify-between w-ful p-5">
+                            <div class="">
+                                <span class="block text-xl">Productos</span>
+                                <span class="text-sm">18</span>
+                            </div>
+                            <div class="text-5xl ">
+                                <img src="/img/estadisticas/img-1.png" alt="" class="w-12 h-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                        <div class="flex justify-between w-ful p-5">
+                            <div class="">
+                                <span class="block text-xl">Enviados</span>
+                                <span class="text-sm">89</span>
+                            </div>
+                            <div class="text-5xl">
+                                <img src="/img/estadisticas/img-2.png" alt="" class="w-12 h-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                        <div class="flex justify-between w-ful p-5">
+                            <div class="">
+                                <span class="block text-xl">Suspendidos</span>
+                                <span class="text-sm">5</span>
+                            </div>
+                            <div class="text-5xl">
+                                <img src="/img/estadisticas/img-3.png" alt="" class="w-12 h-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-64 h-24 border-sm rounded shadow-[0px_1px_6px_6px_rgba(10,0,0,0.05)]">
+                        <div class="flex justify-between w-ful p-5">
+                            <div class="">
+                                <span class="block text-xl">Vendidos</span>
+                                <span class="text-sm">158</span>
+                            </div>
+                            <div class="text-5xl">
+                                <img src="/img/estadisticas/img-4.png" alt="" class="w-12 h-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full border border_color  p-6 shadow-inner rounded overflow-y-auto mt-4">
+                    <form action="/administrador/guardar/respuesta" method="POST">
+                        <h1 class="text-center">Responder Reclamo</h1>
+                        <div class="flex gap-4 p-4">
+                            <div class="w-full">
+                                <label for="" class="block">codigo Reclamo</label>
+                                <input name="id_reclamo" th:value="${reclamo.id_reclamo}" type="text" class="bg-gray-100 w-full outline-none border shadow-sm px-2 py-4 rounded" readonly>
+                            </div>
+                            <div class="w-full">
+                                <label for="" class="block">Codigo Usuario</label>
+                                <input name="id_usuario" th:value="${reclamo.id_usuario}"  type="text" class=" bg-gray-100 w-full outline-none border shadow-sm px-2 py-4 rounded" readonly >
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4" >
+                            <div class="w-full">
+                                <label for="" class="block">Motivo</label>
+                                <input  name="motivo" th:value="${reclamo.motivo}" type="text"  class="bg-gray-100 w-full outline-none border shadow-sm px-2 py-4 rounded" readonly>
+                            </div>
+                            <div class="w-full">
+                                <label for="" class="block">estado</label>
+                                <select name="id_estado_mensaje" id="" th:field="${reclamo.id_estado_mensaje}" class=" w-full outline-none border shadow-sm px-2 py-4 rounded" >
+                                    <option th:value="1">PENDIENTE</option>
+                                    <option th:value="2">RESPONDIDO</option>
+                                </select>
+                            </div>
+                          
+                        </div>
+                        <div class="flex gap-4 p-4" >
+                            <div class="w-full text-sm">
+                                <label for="" class="block">  Reclamo  Usuario</label>
+                                <textarea name="descripcion"  type="text" class="bg-gray-100 resize-none w-full outline-none border shadow-sm px-2 py-4 rounded h-32" readonly  th:text="${reclamo.descripcion}"> </textarea>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4" >
+                            <div class="w-full">
+                                <label for="" class="block">Responder  Reclamo</label>
+                                <textarea name="respuesta"   type="text" class="resize-none w-full outline-none border shadow-sm px-2 py-4 rounded h-32" th:text="${reclamo.respuesta}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 p-4 justify-center" >
+                                <input type="submit" value="Guardar" class="text-xl border rounded shadow-sm text-white bg-sky-700  px-4 py-2 cursor-pointer hover:bg-sky-800">
+                                <a href="/administrador/reclamos"  class="text-xl border rounded shadow-sm bg-white text-sky-700 border-sky-700  px-4 py-2 cursor-pointer">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+
+                <br> <br> <br> <br> <br>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

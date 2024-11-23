@@ -1,0 +1,83 @@
+.contenedor_alerta {
+    width: 350px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    gap: 20px;    
+   
+    transition: transform 0.5s ease; /* Transición de animación */
+  }
+  .alerta {   
+    width: 100%;    
+    box-shadow: 0px 0px 5px 0px rgb(34, 34, 34);
+    border-radius: 5px;
+    color: white; /* Color del texto */
+    padding: 15px 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .respuestaCorrecta{
+    border-radius: 5px;
+    background-color: #4CAF50; /* Color de fondo */
+  }
+  .respuestaIncorrecta{
+    border-radius: 5px;
+    background-color: #be2626; /* Color de fondo */
+  }
+  .alerta div{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+.alerta i {
+    font-size: 1.8rem;
+
+}
+.alerta span{
+    font-size: .8rem;  
+}
+  .activarAlerta{
+    display: block;
+    animation: activarAlerta 0.5s;
+  }
+
+  .slider_alerta {
+      width: 90%;
+      margin-top: -4px;
+      border-bottom: 4px solid rgb(244, 244, 244);
+      margin-left: auto;
+      margin-right: auto;
+      animation: reducirAncho 4s forwards;
+  }
+  @keyframes reducirAncho {
+      0% {
+          width: 90%;
+      }
+      100% {
+          width: 0%;
+      }
+  }
+@keyframes activarAlerta {
+  from {
+    right:-300px;
+  }top{
+    top: 0px;
+  }
+}
+
+.custom-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side, #766DF4 94%, #0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, #766DF4);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: s3 3s linear infinite ; /* Ajuste de la duración a 3 segundos */
+}
+
+@keyframes s3 {
+  100% { transform: rotate(1turn); 
+  }
+}
